@@ -1,0 +1,1290 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,600,0,0" />
+
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    /*background: #3D3D3D;*/
+    background: green;
+    font-family: "Poppins",sans-serif;
+    /*touch-action: pan-y;*/
+    overflow: auto;
+    width: 10%;
+    height: 10%;
+    transition: all .3s;
+}
+
+/*.geometry{
+    position: fixed;
+    z-index: -1;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(to bottom, #fff, #dcdcdc);
+    box-shadow: 
+    0px 0px 2px 2px rgba(0, 0, 255, 0.1),
+    0px 0px 6px 4px rgba(0, 0, 255, 0.1),
+    0px 0px 10px 6px rgba(0, 0, 255, 0.1),
+    0px 0px 20px 12px rgba(0, 0, 255, 0.1),
+    0px 0px 30px 18px rgba(0, 0, 255, 0.1),
+    0px 0px 40px 24px rgba(0, 0, 255, 0.1),
+    0px 0px 50px 30px rgba(0, 0, 255, 0.1),
+    0px 0px 60px 36px rgba(0, 0, 255, 0.1),
+    0px 0px 70px 42px rgba(0, 0, 255, 0.1),
+    0px 0px 80px 48px rgba(0, 0, 255, 0.1);
+}
+.circle{
+    border-radius: 100%;
+    top: 10px;
+    left: 26px;
+}
+.box{
+    bottom: 78px;
+    left: 45px;
+}
+.roundedbox{
+    border-radius: 5px;
+    right: 38px;
+    top: 50px;
+}*/
+::selection{
+    background: white;
+    color: black;
+    border-radius: 3px;
+}
+.bsodscreen ::selection{
+    background-color: red;
+}
+.post-title{
+    position: absolute;
+    right: 0;
+    font-family: "Poppins",sans-serif;
+    color: white;
+    background: lightgray;
+    width: fit-content;
+    height: fit-content;
+    padding: 5;
+}
+.aboutdebug{
+  width: 200px;
+  height: 200px;
+  color: white;
+  border: 3px solid white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+.aboutdebug #ADok{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 2px;
+  width: 100px;
+}
+.debugMenu{
+  font-family: monospace;
+  font-size: 10px;
+  width: 100%;
+  height: 11px;
+  background: gray;
+  color: white;
+  display: none;
+  gap: 20px;
+  position: fixed;
+  top: 0;
+}
+.debugMenu p:active{
+  border: 1px solid white;
+}
+
+.debugscr1{
+  font-family: monospace;
+  font-size: 10px;
+  color: white;
+  display: none;
+  position: fixed;
+  top: 0;
+}
+.debugscr2{
+  font-family: monospace;
+  width: 50%;
+  font-size: 10px;
+  text-align: right;
+  color: white;
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+.dMfile{
+  width: fit-content;
+}
+.dMfile .select-btn{
+  cursor: pointer;
+  background: #252525;
+}
+.dMfile .dMfileoptions{
+  width: 100px;
+  position: relative;
+  background: #252525;
+  list-style: none;
+  border: 1px solid white;
+  display: none;
+}
+.dMfile .dMfileoptions .dMfileoption:hover{
+  background: darkgray;
+}
+.dMfile .dMfileoptions .dMfileoption.about{
+  border-top: .5px solid lightgray;
+}
+.dMfile.active .dMfileoptions{
+  display: block;
+}
+
+.dMrun{
+  width: fit-content;
+}
+.dMrun .select-btn{
+  cursor: pointer;
+  background: #252525;
+}
+.dMrun .dMrunoptions{
+  width: 100px;
+  position: relative;
+  background: #252525;
+  list-style: none;
+  border: 1px solid white;
+  display: none;
+}
+.dMrun .dMrunoptions .dMrunoption:hover{
+  background: darkgray;
+}
+.dMrun .dMrunoptions .dMrunoption.about{
+  border-top: .5px solid lightgray;
+}
+.dMrun.active .dMrunoptions{
+  display: block;
+}
+.dMruninputUI{
+  color: white;
+  width: 100px;
+  position: relative;
+  background: #252525;
+  list-style: none;
+  border: 1px solid white;
+  display: none;
+}
+.buildstring {
+    z-index: -1;
+    font-size: 15px;
+    color: white;
+    font-family: monospace;
+    position: fixed;
+    bottom: 40px;
+    right: 0;
+    text-align: right;
+    /**/display: none;
+    grid-template-columns: 1fr;
+}
+.buildstring::before{
+    transform: scale(0);
+    transition: transform ease-out 100ms;
+    content: "Developer Experimental Program";
+    position: absolute;
+    background: black;
+    padding: 10px;
+    top: -30px;
+    left: -50%;
+    white-space: none;
+    border-radius: 5px;
+}
+.buildstring:hover::before{
+    transform: scale(1);
+}
+.runbsod{
+    position: absolute;
+    z-index: 1;
+}
+.clearmenu{
+    width: 100%;
+    height: 40px;
+}
+/*--- Taskbar ---*/
+.taskbar{
+    z-index: 1;
+    transition: .4s ease;
+    position: fixed;
+    left: 50%;
+    bottom: 10px;
+    transform: translate(-50%);
+    width: calc(100% - 20px);
+    height: 50px;
+    background: #efefef;
+    /*box-shadow: -6px -6px 14px rgba(255, 255, 255, .7),
+              -6px -6px 10px rgba(255, 255, 255, .5),
+              6px 6px 8px rgba(255, 255, 255, .075),
+              6px 6px 10px rgba(0, 0, 0, .15);px 60px #ffffff;*/
+    border-radius: 12px;
+    opacity: 100%;
+    overflow: hidden;
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+}
+.taskbar .menus{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.menus button{
+  width: 50px;
+  height: 50px;
+  border: .2px solid white;
+}
+.menus .menu3{
+  display: none;
+}
+.taskbar.glass{
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+}
+span.material-symbols-rounded{
+  font-size: 3.8em;
+}
+.m1content{
+  
+}
+.m2content{
+  visibility: hidden;
+  /*opacity: 0%;*/
+  min-width: 300px;
+  height: 50px;
+  background: #F3F3F3;
+  /*box-shadow: -6px -6px 14px rgba(255, 255, 255, .7),
+              -6px -6px 10px rgba(255, 255, 255, .5),
+              6px 6px 8px rgba(255, 255, 255, .075),
+              6px 6px 10px rgba(0, 0, 0, .15);*/
+  border-radius: 12px;
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%);
+  transition: .3s ease;
+  overflow: scroll;
+}
+.m2content .content{
+  width: 300px;
+  height: 300px;
+}
+#m2btn{
+  background: transparent;
+  border: .3px solid #ffffff;
+  border-radius: 2px;
+}
+#m2btn:nth-child(1){
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100px;
+ 
+}
+#m2btn:nth-child(2){
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 200px;
+ 
+}
+#m2btn:nth-child(3){
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 200px;
+  height: 200px;
+ 
+}
+#m2btn:nth-child(4){
+  position: absolute;
+  bottom: 20px;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  transition: .3s;
+}
+#inputsearch{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+}
+#iptsearchbtn{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+}
+.search{
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(#C0C0C0, #AAAAAA);
+  position: absolute;
+  z-index: 1;
+  bottom: -300px;
+  opacity: 0%;
+  transition: .3s;
+}
+
+#menu1:hover, #menu2:hover{
+  border: 2px solid white;
+  border-radius: 3px;
+}
+
+/*--- CharmBar ---*/
+.opencharm{
+    width: 10px;
+    height: 50px;
+    opacity: 50%;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+    background: #dadada;
+    z-index: 1;
+}
+.charmcontent{
+    position: fixed;
+    top: 50%;
+    right: -100%;
+    transform: translate(0, -50%);
+    background: #dadada;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+    border-radius: 3px;
+    z-index: 2;
+}
+.charmcontent button{
+    width: 45px;
+    height: 45px;
+    color: #515151;
+    background: lightgray;
+    border: 0.5px solid lightgray;
+    border-radius: 5px;
+    overflow: fit-content;
+}
+.charmcontent button:hover{
+    background: blue;
+}
+/*--- StartScreen ---*/
+.start{
+    width: 10px;
+    height: 10px;
+    opacity: 50%;
+    position: absolute;
+    z-index: 1;
+    bottom: 20%;
+    left: 0;
+    transition: 0.8px ease;
+    overflow: hidden;
+}
+.start:hover{
+    width: 40px;
+    height: 40px;
+    opacity: 100%;
+    background: black;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    color: #ffffff;
+    transition: 0.8px ease;
+}
+.startcontent{
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: black;
+    left: -100%;
+    top: 0;
+    transition: .2s;
+    /*display: grid;
+    grid-template-columns: 1fr 1fr 1fr;*/
+    z-index: 2;
+    font-family: 'VT323', monospace;
+    color: white;
+    overflow: scroll;
+}
+.devmenus{
+    border: 1px inset white;
+    display: grid;
+}
+.devmenus button{
+  display: flex;
+  width: 124px;
+  height: 60px;
+  font-weight: 1;
+}
+/* BSOD */
+.bsodscreen{
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: #2A2A2A;
+    top: 0;
+    z-index: 5;
+    text-align: center;
+}
+.bsodtext{
+    color: white;
+    font-family: 'VT323', monospace;
+    font-weight: 21;
+    font-size: 30px;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.clearbsod{
+    margin: 2%;
+    padding: 2%;
+    font-size: 100px;
+    background: none;
+    border: none;
+    color: white;
+}
+.clearbsod:Hover{
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+                    /* DEVELOPER DOCS*/
+.devdocs{
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #D7E1EC,#FFFFFF);
+    top: 0;
+    z-index: 2;
+}
+.devdocs iframe{
+  border: 1px solid white;
+  width: 100%;
+  height: 100%;
+}
+/*---ContextMenu*/
+
+#terminalTextInput{
+	display: block;
+	width: 100%;
+	color: white;
+  font-family: 'Roboto Mono', monospace;
+}
+#ls{
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(50%);
+  display: none;
+  color: green;
+  width: 50%;
+  height: 100px;
+  background: #dadada;
+}
+#datetimecapsule{
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+  background: red;
+  width: 200px;
+  height: 200px;
+}
+@media (orientation:landscape){
+  #ls{
+    display: none;
+  }
+  #debugLS{
+    display: inline;
+  }
+  #debugPR{
+    display: none;
+  }
+}
+@media (orientation:portrait){
+  #debugPR{
+    display: inline;
+  }
+  #debugLS{
+    display: none;
+  }
+}
+@media(width > 800px){
+  .taskbar{
+    width: 300px;
+  }
+  #dateandtime{
+    display: none;
+  }
+  .menus .menu3{
+    display: flex;
+  }
+  #datetimecapsule{
+    display: block;
+  }
+}
+@media(width < 320px){
+  .taskbar{
+    height: 60px;
+  }
+  .taskbar::before{
+    content: "low resolution can cause a bug!";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    overflow: auto;
+    background: yellow;
+    color: black;
+  }
+}
+@media(width < 230px){
+  .taskbar::before{
+    content: "<!> Can't Display FlyBox!";
+    background: red;
+    color: white;
+  }
+  .m2content{
+    display: none;
+  }
+}
+</style>
+</head>
+<div class="meta">
+    <!--meta name="viewport" content="width=800"/-->
+</div>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
+    
+    <p id="ls">
+      Welcome To Design Preview!
+      <button>Give Feedback</button>
+      <button>Go To Old Design</button>
+    </p>
+<!-----BSOD Class----->
+    <div class="bsod">
+        <div class="bsodscreen">
+            <button class="clearbsod" onclick="clearBSOD()">&lt;!&gt;</button>
+            <span class="bsodtext">An Error Has Been Detected!</span>
+            <span class="bsodtext">System Crash Dump:</span>
+            <span class="bsodtext">ERR_CODE:ERR123</span>
+        </div>
+    </div>
+    
+<!-----CharmBar Class----->
+    <div class="charmbar">
+        <button class="opencharm" onclick="openCharm()">|</button>
+        <div class="charmcontent">
+            <button onclick="glasstheme()">&gt;</button>
+            <button>&lt;</button>
+            <button>&Acirc;</button>
+            <button>&otimes;</button>
+            <button onclick="bviewport()">haha</button>
+            <button onclick="debug()" ondblclick="debug2()"><=></button>
+            <button onclick="closeCharm()">&times;</button>
+        </div>
+        <script>
+            
+        </script>
+    </div>
+<!-----StartScreen Class----->
+    <div class="startscreen">
+      <button class="start" onclick="openBar()">>_</button>
+      <div class="startcontent">
+        <div class="starttitle">
+          <span>
+            <button onclick="closeBar()">&lt;&times;</button>Developer Console Test
+          </span>
+          <p>v1</p>
+        </div>
+        <div class="devmenus">
+          <button onclick="closeBar()">Desktop</button>
+          <button onclick="runBSOD()">BSOD!</button>
+          <button onclick="docsUI()">Docs</button>
+          <button onclick="debug()">Enable Debug Screen</button>
+          <button id="btn">Fullscreen : OFF</button>
+        </div>
+        <div class="terminalCont">
+          <div id="terminalReslutsCont">
+       	</div>
+       	<form>
+         	<input id="terminalTextInput" type="text" placeholder="Try typing hi or help..." autocomplete="off">
+       	</form>
+      </div>
+    </div>
+    </div>
+<!-----Debug Screen Class----->
+    <div class="aboutdebug">
+      <h1>Debug Menu</h1>
+      <h6>for developer</h6>
+      <p>licensed to: unknown</p>
+      <button id="ADok" onclick="adUI()">OK</button>
+    </div>
+    <div class="debugMenu">
+      <div class="dMfile">
+        <p class="dMfilebtn">File</p>
+        <ul class="dMfileoptions">
+          <li class="dMfileoption">Open...</li>
+          <li class="dMfileoption">Edit...</li>
+          <li class="dMfileoption">New...</li>
+          <li class="dMfileoption about" onclick="adUI()">About Debug...</li>
+        </ul>
+      </div>
+      <p id="dMload">Load...</p>
+      <div class="dMrun">
+        <p class="dMrunbtn" ondblclick="dMruninput()">Run</p>
+        <ul class="dMrunoptions">
+          <li class="dMrunoption">coming soon...</li>
+        </ul>
+        <ul class="dMruninputUI">
+          <input type="text"/>
+          <button>OK</button>
+        </ul>
+      </div>
+      <p id="dMdebug">Debug</p>
+      #unstabledevdebug
+    </div>
+    <!--div id="dMfcon">
+      <button>Open</button>
+      <button>Edit</button>
+      <button>About Debug...</button>
+    </div-->
+    <div class="debugscr1">
+      <p>ViSe Developer Preview</p>
+      <div>
+        <span id="fps"></span><span> fps</span>
+      </div>
+      
+      <p>debug screen Test</p>
+      <p>Build Confidential</p>
+      <br />
+      <p>contextmenu:[customDisabledByDefault]</p>
+      <p>draggablewindowpos:[!undefined]</p>
+      <p>gyroscope:InProgress</p>
+    </div>
+    <div class="debugscr2">
+      <p>Kernel:NeoCardforDev</p>
+      <p>KernelVersion:[unknown]</p>
+      <div>
+        <span>orientation:</span><span id="debugPR"> portrait</span><span id="debugLS"> landscape</span>
+      </div>
+      <br />
+      <p id="debugDevice"></p>
+      <br />
+      <p id="debugBrowser"></p>
+    </div>
+<!-----Taskbar Class----->
+
+    <div class="taskbar">
+      <div class="menus">
+        <button onclick="m1()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <button onclick="m2()">
+          <i class="fa-solid fa-angle-up"></i>
+        </button>
+        <button class="menu3">m</button>
+        <div id="dateandtime">
+          <p id="date"></p>
+          <p id="time"></p>
+        </div>
+      </div>
+    </div>
+    <div id="datetimecapsule">
+      <p id="date"></p>
+      <p id="time"></p>
+    </div>
+    <div class="m1content"></div>
+    <div class="m2content">
+     <div class="content">
+      <button id="m2btn">
+        <span class="material-symbols-rounded">space_dashboard</span>
+      </button>
+      <button id="m2btn">
+        <span class="material-symbols-rounded">&lt;/&gt;</span>
+      </button>
+      <button id="m2btn">
+        <span class="material-symbols-rounded">deployed_code</span>
+      </button>
+      <button id="m2btn" onclick="searchbtn()">
+        <!--button onclick="searchbtn()">exit</button>
+        <span class="material-symbols-rounded">search</span>
+        <input type="text" id="inputsearch"/>
+        <button class="material-symbols-rounded" id="iptsearchbtn">search</button-->
+      </button>
+      <div class="search">
+        <button onclick="searchbtn()">wip.exitsearch</button>
+        <input type="text" id="inputsearch"/>
+        <button class="material-symbols-rounded" id="iptsearchbtn">search</button-->
+      </div>
+     </div>
+    </div>
+    
+
+    
+<!----- New Taskbar Class----->
+    <div class="buildstring">
+        <span>ViSe Developer Preview</span>
+        <span>In-Progress-Build</span>
+        <span>Build | Confidential</span>
+        <span>: Taskbar Focused Build</span>
+    </div>
+    
+    <div class="devdocs">
+        <button onclick="docsUI()">document.exit</button>
+        <iframe src="https://fqrryqkz2hcjy37mcfdz6g.on.drv.tw/developerdocs/" frameborder="0"></iframe>
+    </div>
+    
+</body>
+
+    <!--Script Session--->
+<script>
+// Informasi Perangkat
+var debugDevice = document.querySelector('#debugDevice');
+var debugBrowser = document.querySelector('#debugBrowser');
+
+var deviceInfo = "Device: " + navigator.userAgent;
+debugDevice.innerText = (deviceInfo);
+console.log(deviceInfo);
+
+// Informasi Browser
+var browserInfo = "Browser: " + navigator.appName + " - " + navigator.appVersion;
+debugBrowser.innerText = (browserInfo);
+console.log(browserInfo);
+
+// Ukuran Layar Browser
+var screenWidth = window.screen.width;
+var screenHeight = window.screen.height;
+var browserSizeInfo = "Browser Size: " + screenWidth + "x" + screenHeight;
+console.log(browserSizeInfo);
+
+
+
+// Update the date and time every second
+    setInterval(function() {
+      var now = new Date();
+      var year = now.getFullYear();
+      var month = now.getMonth() + 1; // months are zero indexed
+      var day = now.getDate();
+      var hour = now.getHours();
+      var minute = now.getMinutes();
+      var second = now.getSeconds();
+
+      // Format the output
+      var dateStr = month + '/' + day + '/' + year;
+      var timeStr = hour + ':' + minute + ':' + second;
+      /*var dateStr = now.toLocaleDateString();
+      var timeStr = now.toLocaleTimeString();*/
+      var dateTimeStr = dateStr + ' ' + timeStr;
+      document.getElementById('time').innerText = dateStr;
+      document.getElementById('date'). innerText = timeStr;
+    }, 1000);
+
+var body = document.querySelector('body');
+  
+
+//--- DEVELOPER DOCS ---
+
+const devdocs = document.querySelector('.devdocs');
+let docsUI = function(){
+    if(isClicked){
+        devdocs.style.display = "block";
+        isClicked = false;
+    }
+    else{
+        devdocs.style.display = "none";
+        isClicked = true;
+    }
+}
+
+//--- BSOD Session
+const bsodscreen = document.querySelector('.bsodscreen');
+
+function runBSOD() {
+    bsodscreen.style.display = "block";
+}
+function clearBSOD() {
+    bsodscreen.style.display = "none";
+}
+const bsod = () =>{
+  bsodscreen.style.display = "block";
+}
+
+//---StartContent Session
+const startcontent = document.querySelector('.startcontent');
+
+const devui = () =>{
+  startcontent.style.left = "0";
+}
+function openBar() {
+     startcontent.style.left = "0";
+}
+function closeBar () {
+     startcontent.style.left = "-100%";
+}
+//---Debug Screen Session
+var debugScr1 = document.querySelector('.debugscr1');
+var debugScr2 = document.querySelector('.debugscr2');
+var debugMenu = document.querySelector('.debugMenu');
+const buildStr = document.querySelector('.buildstring');
+const debug = () => {
+  if(isClicked){
+    debugScr1.style.display = "block";
+    debugScr2.style.display = "block";
+    buildStr.style.visibility = "hidden";
+    isClicked = false;
+  }
+  else{
+    debugScr1.style.display = "none";
+    debugScr2.style.display = "none";
+    buildStr.style.visibility = "visible";
+    isClicked = true;
+  }
+}
+const debug2 = () => {
+  if(isClicked){
+    debugScr1.style.display = "none";
+    debugScr2.style.display = "none";
+    debugMenu.style.display = "flex";
+    buildStr.style.visibility = "hidden";
+    isClicked = false;
+  }
+  else{
+    debugScr1.style.display = "none";
+    debugScr2.style.display = "none";
+    debugMenu.style.display = "none";
+    buildStr.style.visibility = "visible";
+    isClicked = true;
+  }
+}
+const dMfileMenu = document.querySelector(".dMfile"),
+       dMfileBtn = dMfileMenu.querySelector(".dMfilebtn"),
+       dMfileoptions = dMfileMenu.querySelectorAll(".dMfileoption");
+
+dMfileBtn.addEventListener("click", () => dMfileMenu.classList.toggle("active"));       
+
+dMfileoptions.forEach(dMfileoption =>{
+    dMfileoption.addEventListener("click", ()=>{
+        dMfileMenu.classList.remove("active");
+    })
+})
+const dMrunMenu = document.querySelector(".dMrun"),
+       dMrunBtn = dMrunMenu.querySelector(".dMrunbtn"),
+       dMrunoptions = dMrunMenu.querySelectorAll(".dMrunoption");
+
+dMrunBtn.addEventListener("click", () => dMrunMenu.classList.toggle("active"));       
+
+dMrunoptions.forEach(dMrunoption =>{
+    dMrunoption.addEventListener("click", ()=>{
+        dMrunMenu.classList.remove("active");
+    })
+})
+const dMruninputUI = document.querySelector('.dMruninputUI');
+const dMruninput = () => {
+  if(isClicked){
+    isClicked = false;
+    dMruninputUI.style.display = "block";
+  }
+  else{
+    isClicked = true;
+    dMruninputUI.style.display = "none";
+  }
+}
+const aboutdebug = document.querySelector('.aboutdebug'),
+           about = document.querySelector('.about');
+const adUI = () => {
+  if(isClicked){
+    aboutdebug.style.display = "block";
+    isClicked = false;
+  }
+  else{
+    aboutdebug.style.display = "none";
+    isClicked = true;
+  }
+}
+//---Debug Menu File Session
+
+//---FPS
+var fps = document.getElementById("fps");
+var startTime = Date.now();
+var frame = 0;
+
+function tick() {
+  var time = Date.now();
+  frame++;
+  if (time - startTime > 1000) {
+      fps.innerHTML = (frame / ((time - startTime) / 1000)).toFixed(1);
+      startTime = time;
+      frame = 0;
+	}
+  window.requestAnimationFrame(tick);
+}
+tick();
+
+//---CharmBar Session
+const charmcontent = document.querySelector('.charmcontent');
+var body = document.querySelector('body');
+function openCharm() {
+    charmcontent.style.right = "10px";
+    //body.style.background = "gray";
+}
+function closeCharm() {
+    charmcontent.style.right = "-100%";
+    //body.style.background = "green";
+}
+
+//---Taskbar Session
+const m1content = document.querySelector('.m1content');
+const m2content = document.querySelector('.m2content');
+let isClicked = "true";
+
+let m1 = () =>{
+  if(isClicked){
+    m1content.style.bottom="45px";
+    isClicked = false;
+    console.log(isClicked);
+  }
+  else{
+    
+    isClicked = true;
+    console.log(isClicked);
+  }
+}
+let m2 = () =>{
+  if(isClicked){
+    m2content.style.visibility="visible";
+    m2content.style.height="320px";
+    m2content.style.bottom="40px";
+    //m2content.style.opacity="100%";
+    isClicked = false;
+    console.log(isClicked);
+  }
+  else{
+    m2content.style.visibility="hidden";
+    m2content.style.height="50px";
+    m2content.style.bottom="10px";
+    //m2content.style.opacity="0%";
+    isClicked = true;
+    console.log(isClicked);
+  }
+}
+let m3 = () =>{
+  if(isClicked){
+    
+    isClicked = false;
+    console.log(isClicked);
+  }
+  else{
+    
+    isClicked = true;
+    console.log(isClicked);
+  }
+}
+let clearmenu = () =>{
+  
+    isClicked = false;
+    console.log(isClicked);
+}
+//---m2 content---
+const search = document.querySelector('.search');
+function searchbtn(){
+  if(isClicked){
+    search.style.opacity = "100%";
+    search.style.bottom = "0";
+    isClicked = false;
+  }
+  else{
+    search.style.opacity = "0%";
+    search.style.bottom = "-300px";
+    isClicked = true;
+    console.log(isClicked)
+  }
+
+}
+//---GlassTheme Session---
+const taskbar = document.querySelector('.taskbar');
+let glasstheme = function(){
+    if(isClicked){
+        taskbar.classList.add('glass');
+        isClicked = false;
+    }
+    else{
+        taskbar.classList.remove('glass');
+        isClicked = true;
+    }
+}
+
+//---Fullscreen Session
+
+let myDocument = document.documentElement;
+let btn = document.getElementById("btn");
+            
+btn.addEventListener("click", ()=>{
+    if(btn.textContent == "Fullscreen : OFF"){
+        if(myDocument.requestFullscreen){
+            myDocument.requestFullscreen();
+        }
+        else if(myDocument.msRequestFullscreen){
+            myDocument.msRequestFullscreen();
+        }
+        else if(myDocument.mozRequestFullscreen){
+            myDocument.mozRequestFullscreen();
+        }
+        else if(myDocument.webkitRequestFullscreen){
+            myDocument.webkitRequestFullscreen();
+        }
+
+        btn.textContent = "Fullscreen : ON";
+    }
+    else{
+        if(document.exitFullscreen){
+            document.exitFullscreen();
+        }
+        else if(document.msexitFullscreen){
+            document.msexitFullscreen();
+        }
+        else if(document.mozexitFullscreen){
+            document.mozexitFullscreen();
+        }
+        else if(document.webkitexitFullscreen){
+            document.webkitexitFullscreen();
+        }
+
+        btn.textContent = "Fullscreen : OFF";
+    }
+});
+
+//---GUI SCALING---   (IN DEVELOPMENT!)
+const head = document.querySelector('head'),
+        metaGUI = document.querySelector('.meta');
+let bviewport = function(){
+    if(isClicked){
+        metaGUI.innerHTML = "<meta name='viewport' content='width=300'></meta>";
+        console.log(metaGUI);
+    }
+}
+</script>
+
+<div class="geometry circle"></div>
+<div class="geometry box"></div>
+<div class="geometry roundedbox"></div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+ 
+  document.getElementsByTagName('form')[0].onsubmit = function(evt) {
+    evt.preventDefault(); // Preventing the form from submitting
+    checkWord(); // Do your magic and check the entered word/sentence
+    window.scrollTo(0,150);
+  }
+ 
+  // Get the focus to the text input to enter a word right away.
+  document.getElementById('terminalTextInput').focus();
+ 
+  // Getting the text from the input
+  var textInputValue = document.getElementById('terminalTextInput').value.trim();
+ 
+  //Getting the text from the results div
+  var textResultsValue = document.getElementById('terminalReslutsCont').innerHTML;
+ 
+  // Clear text input
+  var clearInput = function(){
+    document.getElementById('terminalTextInput').value = "";
+  }
+ 
+  // Scrtoll to the bottom of the results div
+  var scrollToBottomOfResults = function(){
+    var terminalResultsDiv = document.getElementById('terminalReslutsCont');
+    terminalResultsDiv.scrollTop = terminalResultsDiv.scrollHeight;
+  }
+ 
+  // Scroll to the bottom of the results
+  scrollToBottomOfResults();
+ 
+  // Add text to the results div
+  var addTextToResults = function(textToAdd){
+    document.getElementById('terminalReslutsCont').innerHTML += textToAdd;
+    scrollToBottomOfResults();
+  }
+ 
+  // Getting the list of keywords for help & posting it to the screen
+  var postHelpList = function(){
+    // Array of all the help keywords
+    var helpKeyWords = [
+      "- Open + website URL to open it in the browser (ex. open discord.com)",
+      "- Google + keyword to search directly in Google (ex. google web development)",
+      "- YouTube + keyword to search directly in YouTube (ex. ProgrammingWithNiko)",
+      "- Wiki + keyword to search directly in Wikipedia (ex. wiki numbers)",
+      "- 'Time' will display the current time.",
+      "- 'Date' will display the current date.",
+      "- 'tech' will make you expert by watching videos",
+      "* There are more keywords that you have to discover by yourself."
+    ].join('<br>');
+    addTextToResults(helpKeyWords);
+  }
+ 
+  // Getting the time and date and post it depending on what you request for
+  var getTimeAndDate = function(postTimeDay){
+    var timeAndDate = new Date();
+    var timeHours = timeAndDate.getHours();
+    var timeMinutes = timeAndDate.getMinutes();
+    var dateDay = timeAndDate.getDate();
+    console.log(dateDay);
+    var dateMonth = timeAndDate.getMonth() + 1; // Because JS starts counting months from 0
+    var dateYear = timeAndDate.getFullYear(); // Otherwise we'll get the count like 98,99,100,101...etc.
+ 
+    if (timeHours < 10){ // if 1 number display 0 before it.
+      timeHours = "0" + timeHours;
+    }
+ 
+    if (timeMinutes < 10){ // if 1 number display 0 before it.
+      timeMinutes = "0" + timeMinutes;
+    }
+ 
+    var currentTime = timeHours + ":" + timeMinutes;
+    var currentDate = dateDay + "/" + dateMonth + "/" + dateYear;
+ 
+    if (postTimeDay == "time"){
+      addTextToResults(currentTime);
+    }
+    if (postTimeDay == "date"){
+      addTextToResults(currentDate);
+    }
+  }
+ 
+  // Opening links in a new window
+  var openLinkInNewWindow = function(linkToOpen){
+    window.open(linkToOpen, '_blank');
+    clearInput();
+  }
+ 
+  // Clear Command
+  var clickTest = "<button>clickTest</button>";
+  var runCommand = function(cmdOutput){
+    if (cmdOutput == "clear"){
+      console.log(clickTest);
+    }
+    if (cmdOutput == "cls"){
+      addTextToResults(currentDate);
+    }
+  };
+  
+  //experimental features
+  var experimentalEnabled = function(experimentalEnabled){
+    if (experimentalEnabled == "new_ui"){
+      content3.innerHTML = clickTest;
+      content3.style.color = "red";
+      console.log(clickTest);
+    }
+    if (experimentalEnabled == "bliss"){
+      addTextToResults(currentDate);
+    }
+  };
+  
+  // Having a specific text reply to specific strings
+  var textReplies = function() {
+    switch(textInputValueLowerCase){
+      // replies
+      case "code":
+        clearInput();
+        addTextToResults("Get web elements source code at <a target='_blank' href='</a>");
+        break;
+ 
+      case "programming":
+        clearInput();
+        addTextToResults('Web development examples!');
+        openLinkInNewWindow('https://kurva873.blogspot.com');
+        break;
+ 
+      case "hello":
+      case "hi":
+      case "hola":
+        clearInput();
+        addTextToResults("Hello, I am your assistant... I am based on pure JavaScript.");
+        break;
+        
+      // replies 
+ 
+      case "youtube":
+        clearInput();
+        addTextToResults("Type youtube + something to search for.");
+        break;
+ 
+      case "google":
+        clearInput();
+        addTextToResults("Type google + something to search for.");
+        break;
+ 
+        case "wiki":
+        case "wikipedia":
+          clearInput();
+          addTextToResults("Type wiki + something to search for.");
+          break;  
+ 
+      case "time":
+        clearInput();
+        getTimeAndDate("time");
+        break;
+ 
+      case "date":
+        clearInput();
+        getTimeAndDate("date");
+        break;
+ 
+      case "help":
+      case "?":
+        clearInput();
+        postHelpList();
+        break;
+        
+      case "clear":
+      case "cls":
+        clearInput();
+        runCommand("clear");
+        break;
+      
+      case "labs new":
+        clearInput();
+        experimentalEnabled("new_ui");
+      break;
+      
+      default:
+      clearInput();
+      addTextToResults("<p>" + "Invalid Command Session." + "</p>");
+      break;
+    }
+  }
+ 
+// Main function to check the entered text and assign it to the correct function
+  var checkWord = function() {
+    textInputValue = document.getElementById('terminalTextInput').value.trim(); //get the text from the text input to a variable
+    textInputValueLowerCase = textInputValue.toLowerCase(); //get the lower case of the string
+ 
+    if (textInputValue != ""){ //checking if text was entered
+      addTextToResults("<p class='userEnteredText'>> " + textInputValue + "</p>");
+      textReplies();
+
+    }
+  };
+ 
+});
+</script>
